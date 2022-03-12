@@ -1,0 +1,10 @@
+{
+  "name": "salus-Noleggio",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue",
+  "proxies": [{
+    "proxyUrl": "https://firebasestorage.googleapis.com"
+  }]
+}
