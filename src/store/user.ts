@@ -89,9 +89,8 @@ export const useAuthStore = defineStore("authStore", {
           this.user = response.user ? response.user : null;
           const profile =  await fbGetUserProfile();
           if(profile){
-            console.log(this.profile)
             this.profile = profile ? profile : null;
-            if(!this.profile.admin && userType==="user" && this.profile.active){
+            if(!this.profile.admin && userType==="user"){
               setStore('user', this.user);
               setStore('profile', this.profile);
               this.error = null;
