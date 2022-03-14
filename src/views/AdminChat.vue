@@ -88,10 +88,13 @@ export default {
   },
   beforeMount() {
     this.getMessages();
+    
   },
   methods: {
     async getMessages() {
-      onSnapshot(doc(db, "messages", this.id), (doc) => {
+      onSnapshot(doc(db, "messages", this.$route.params.id), (doc) => {
+
+        // console.log(this.id)
         const chat = doc.data().chat.map((item) => {
           return {
             id: item.id,
@@ -109,7 +112,8 @@ export default {
       })
     },
     async sendMessage() {
-      await this.authStore.adminSentMessage(this.message.value, this.id);
+      await this.authStore.adminSentMessage(this.message.value, this.$route.params.id);
+      this.message.value = ''
     },
     groupBy(objectArray, property) {
       return objectArray.reduce((acc, obj) => {

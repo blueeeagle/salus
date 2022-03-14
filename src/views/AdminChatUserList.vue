@@ -4,6 +4,7 @@
       <ExploreContainer name="Chat User List"/>
 
       <div class="outerPadding">
+        
         <div class="chatAdminContainer" v-for="(item,i) in getList" :key="i">
           <router-link :to="`/tabs/AdminChat/${item.uid}`">
             <ion-card>
@@ -21,6 +22,7 @@
             </ion-card>
           </router-link>
         </div>
+        
       </div>
     </ion-content>
 
@@ -56,8 +58,11 @@ export default {
       return this.getMessageList
     }
   },
-  beforeMount() {
-    this.getUsersMessageList();
+   mounted() {
+     if(this.getList){
+      this.getUsersMessageList();
+     }
+    
   },
   methods: {
     async getUserDetail(uid) {

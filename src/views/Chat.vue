@@ -1,10 +1,10 @@
 <template>
   <ion-page>
-    <ion-content :fullscreen="true">
+    <ion-content    :fullscreen="true">
       <ExploreContainer name="Chat Page"/>
-      <div class="outerPadding">
-        <ion-row v-for="(item,i) in getChats.messages" :key="i">
-          <ion-col size="12">
+      <div  class="outerPadding">
+        <ion-row  v-for="(item,i) in getChats.messages" :key="i">
+          <ion-col id="chatContainer" size="12">
             <div class="dateContainer">
               <div class="chatDate">
                 {{ getDay(new Date(item[0].id)) }}
@@ -13,7 +13,7 @@
           </ion-col>
           <ion-col>
             <ion-row v-for="(chat,j) in item" :key="j">
-              <ion-col :offset="chat.createdBy===getChats.id?3:0" size="9">
+              <ion-col   :offset="chat.createdBy===getChats.id?3:0" size="9">
                 <ion-card :class="chat.createdBy===getChats.id?`white-bg`:`rose-bg`">
                   <ion-card-subtitle>
                     {{ chat.message }}
@@ -88,6 +88,9 @@ export default {
   beforeMount() {
     this.getMessages();
   },
+  // mounted(){
+
+  // },
   methods: {
     async getMessages() {
       const user = auth.currentUser;
@@ -110,6 +113,7 @@ export default {
     },
     async sendMessage() {
       await this.authStore.sentMessage(this.message.value);
+      this.message.value = ''
     },
     groupBy(objectArray, property) {
       return objectArray.reduce((acc, obj) => {
